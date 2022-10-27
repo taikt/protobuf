@@ -1,0 +1,25 @@
+// Ref:
+-- build proto compiler
+https://github.com/taikt/protobuf/blob/master/src/README.md
+-- example
+https://developers.google.com/protocol-buffers/docs/cpptutorial
+https://medium.com/geekculture/protocol-buffers-in-c-d60865ae7782
+
+// build proto compiler
+$ git clone https://github.com/protocolbuffers/protobuf.git
+$ cd protobuf
+$ git submodule update --init --recursive
+$ ./autogen.sh
+$ ./configure
+$ make
+$ make check
+$ sudo make install
+$ sudo ldconfig # refresh shared library cache.
+
+-- create person.proto
+helloworld_taikt$ protoc --cpp_out=./ person.proto
+helloworld_taikt$ g++ -std=c++11 test_write_person.cpp -o write_person person.pb.cc -L/usr/local/lib -lprotobuf -pthread
+helloworld_taikt$ g++ -std=c++11 test_read_person.cpp -o read_person person.pb.cc -L/usr/local/lib -lprotobuf -pthread
+
+./write_person
+./read_person
